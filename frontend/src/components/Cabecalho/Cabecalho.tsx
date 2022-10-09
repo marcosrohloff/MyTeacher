@@ -7,7 +7,7 @@ const Cabecalho = () => {
                 <Logo src="/imagens/myteacher.png" />
             </div>
 
-            <p>Encontre o proferssor perfeito!</p>
+            <p>Encontre o professor perfeito!</p>
         </CabecalhoContainer>
     )
 }
