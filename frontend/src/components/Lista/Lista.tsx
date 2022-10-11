@@ -1,38 +1,35 @@
 import { Button } from "@mui/material";
+import { Professor } from "../../@types/professor";
+import { FormatadorService } from "../../services/FormatadorService";
+import { Descricao, Foto, Informacoes, ItemLista, ListaStyled, ListaVazia, Nome, Valor } from "./Lista.style";
 
-import {
-  Descricao,
-  Foto,
-  Informacoes,
-  ItemLista,
-  ListaStyled,
-  Nome,
-  Valor,
-} from "./Lista.style";
+interface ListaProps {
+  professores: Professor[];
+  onSelect: (professor: Professor) => void;
+}
 
-const Lista = () => {
+const Lista = (props: ListaProps) => {
   return (
-    <ListaStyled>
-      <ItemLista>
-        <Foto src="	https://avatars.githubusercontent.com/u/7784067?v=4"></Foto>
-        <Informacoes>
-          <Nome>Marcos Fernando</Nome>
-          <Valor>R$ 100,00</Valor>
-          <Descricao>Auas Programaçao</Descricao>
-          <Button>Marcar Aula</Button>
-        </Informacoes>
-      </ItemLista>
-      <ItemLista>
-        <Foto src="	https://avatars.githubusercontent.com/u/7784067?v=4"></Foto>
-        <Informacoes>
-          <Nome>Marcos Fernando</Nome>
-          <Valor>R$ 100,00</Valor>
-          <Descricao>Auas Programaçao</Descricao>
-          <Button>Marcar Aula</Button>
-        </Informacoes>
-      </ItemLista>
-    </ListaStyled>
-  );
-};
+    <div>
+      {props.professores.length > 0 ? (
+        <ListaStyled>
+          {props.professores.map((professor) => (
+            <ItemLista key={professor.id}> 
+              <Foto src="{professor.foto}"></Foto>
+              <Informacoes>
+                <Nome>{professor.nome}</Nome>
+                <Valor>{FormatadorService.valorMonetario(professor.valor_hora)} por hora</Valor>
+                <Descricao>{FormatadorService.valorMonetario(professor.valor_hora)} por hora</Descricao>
+                <Button onClick={() => props.onSelect(professor)} sx={{ width: '70%' }}>Marcar Aula com {professor.nome}</Button>
+              </Informacoes>
+            </ItemLista>
+          ))}
+        </ListaStyled>
+      ) : (
+          <ListaVazia>Nenhum item encontrado</ListaVazia>
+      )}
+    </div>
+  )
+}
 
 export default Lista;
