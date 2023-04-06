@@ -17,10 +17,10 @@ const Home: NextPage = () => {
 
   return (
       <Box sx={{ backgroundColor: 'secondary.main' }}>
-        <Lista 
+        <Lista
         professores={professores}
         onSelect={(professor) => setProfessorSelecionado(professor)}></Lista>
-      </Box>    
+      </Box>
   )
 }
 
